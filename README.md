@@ -1,23 +1,219 @@
-# hello_world
+# Flutter Fundamental Part 1
 
-A new Flutter project.
-
-### Praktikum 3, Membuat Repository Github dan Laporan Praktikum
+## Praktikum 3, Membuat Repository Github dan Laporan Praktikum
 Tangkapan layar pada Praktikum 3, hasil dari menjakankan project hello_world
 ![Screenshot hello_world](images/01.png)
 
-### Praktikum 4, Menerapkan Widget Dasar
+## Praktikum 4, Menerapkan Widget Dasar
 Tangkapan layar pada Praktikum 4, hasil dari menjalankan project hello_world, setelah ditambahkan dengan Widget Text dan Image
 ![Screenshot hello_world](images/02.png)
 
-### Praktikum 5, Menerapkan Widget Material Design dan iOS Cuppertino
-**Langkah 2: Floating Action Button (FAB)**. Tangkapan layar dari langkah 2, *Floating Action Button* sebagai tombol yang terdapat beberapa macam jenis pada flutter yaitu  ButtonBar, DropdownButton, TextButton, FloatingActionButton, IconButton, OutlineButton, PopupMenuButton, dan ElevatedButton..
+## Praktikum 5, Menerapkan Widget Material Design dan iOS Cuppertino
+
+**Langkah 1: Cupertino Button dan Loading Bar**. Import stateless widget dari material dan cupertino. Lalu isi kode di dalam method Widget build adalah sebagai berikut.
+```dart
+return MaterialApp(
+      home: Container(
+        margin: const EdgeInsets.only(top: 30),
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            CupertinoButton(
+              child: const Text("Contoh button"),
+              onPressed: () {},
+            ),
+            const CupertinoActivityIndicator(),
+          ],
+        ),
+      ),
+    );
+```
+Tangkapan layar dari langkah 1
+![Screenshot hello_world](images/07.png)
+
+
+**Langkah 2: Floating Action Button (FAB)**. Tangkapan layar dari langkah 2, *Floating Action Button* sebagai tombol yang terdapat beberapa macam jenis pada flutter yaitu  ButtonBar, DropdownButton, TextButton, FloatingActionButton, IconButton, OutlineButton, PopupMenuButton, dan ElevatedButton. Import stateless widget dari material. Lalu isi kode di dalam method Widget build adalah sebagai berikut.
+```dart
+return MaterialApp(
+      home: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Add your onPressed code here!
+          },
+          child: const Icon(Icons.thumb_up),
+          backgroundColor: Colors.pink,
+        ),
+      ),
+    );
+```
+Tangkapan layar dari langkah 2
 ![Screenshot hello_world](images/04.png)
 
-**Langkah 3: Scaffold Widget**. Tangkapan layar dari Langkah 3, Scaffold Widget digunakan untuk mengatur tata letak sesuai dengan material design
+**Langkah 3: Scaffold Widget**. Tangkapan layar dari Langkah 3, Scaffold Widget digunakan untuk mengatur tata letak sesuai dengan material design. Ubah isi kode `main.dart` seperti berikut
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      home: const MyHomePage(title: 'My Increment App'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'Halo nama saya SALAM RIZQI MULIA',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 50.0,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment Counter',
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+}
+```
+Tangkapan layar dari langkah 3
 ![Screenshot hello_world](images/03.png)
 
-**Langkah 4: Dialog Widget**. Dialog widget pada flutter memiliki dua jenis dialog yaitu *AlertDialog* dan *SimpleDialog*
+**Langkah 4: Dialog Widget**. Dialog widget pada flutter memiliki dua jenis dialog yaitu *AlertDialog* dan *SimpleDialog*. Ubah isi kode `main.dart` seperti berikut.
+```dart
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Scaffold(
+        body: MyLayout(),
+      ),
+    );
+  }
+}
+
+class MyLayout extends StatelessWidget {
+  const MyLayout({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+        child: const Text('Show alert'),
+        onPressed: () {
+          showAlertDialog(context);
+        },
+      ),
+    );
+  }
+}
+
+showAlertDialog(BuildContext context) {
+  // set up the button
+  Widget okButton = TextButton(
+    child: const Text("OK"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text("My title"),
+    content: const Text("This is my message."),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+```
+Berikut tangkapan layar yang menampilkan *Button*.
 ![Screenshot hello_world](images/05.png)
-Berikut tangkapan layar yang menampilkan *Alert Dialog*
+Berikut tangkapan layar yang menampilkan *Alert Dialog*.
 ![Screenshot hello_world](images/06.png)
+
+**Langkah 5: Input dan Selection Widget**. Flutter menyediakan widget yang dapat menerima input dari pengguna aplikasi yaitu antara lain Checkbox, Date and Time Pickers, Radio Button, Slider, Switch, TextField. Contoh penggunaan TextField widget adalah sebagai berikut: 
+```dart
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text("Contoh TextField")),
+        body: const TextField(
+          obscureText: false,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Nama',
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+Berikut tangkapan layar hasil dari *Input* dan *Selection Widget*
+![Screenshot hello_world](images/08.png)
