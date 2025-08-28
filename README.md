@@ -1,5 +1,7 @@
 # Flutter Fundamental Part 1
 
+README sebagai laporan praktikum pada website https://flutter-codelabs.netlify.app
+
 ## Praktikum 3, Membuat Repository Github dan Laporan Praktikum
 Tangkapan layar pada Praktikum 3, hasil dari menjakankan project hello_world
 ![Screenshot hello_world](images/01.png)
